@@ -22,8 +22,6 @@ The repository uses the LUFA library as a submodule.  To clone, use something li
 
     git clone git://github.com/zAxis/PSGrade.git
     cd PSGrade
-    git submodule init
-    git submodule update
 
 
 Configuring
@@ -33,9 +31,8 @@ Edit Makefile to reflect your board.  Alternately, you can just use the build_he
 
 Edit jig_key in src/key.h
 
-//
 // ADD VALID JIG KEY HERE (aka master key)
-//
+
 const uint8_t jig_key[20] = {
         0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00,
@@ -50,8 +47,7 @@ Building
 On Linux, use the AVR GCC toolchain (Debian/Ubuntu package: gcc-avr).
 On Windows, WinAVR should do the trick.
 
-    make clean
-    make
+    ./build_hex.sh
 
 
 Using
@@ -63,9 +59,11 @@ To use the service jig:
 * Press the PS3 power button.
 
 
-Thanks
+Thanks (in no particular order)
 ------
 graf_chokolo
 Hansi
 mathieulh
 kakaroto
+zAxis
+
