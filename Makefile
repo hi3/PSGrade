@@ -59,22 +59,63 @@
 #----------------------------------------------------------------------------
 
 
-#FIRMWARE_VERSION = 3_41
-
 ## *** Select your board *** ##
+
+## Benito
+#MCU = at90usb162
+#BOARD = BENITO
+#F_CPU = 16000000
+
+## Blackcat
+#MCU = at90usb162
+#BOARD = BLACKCAT
+#F_CPU = 16000000
+
+## Maximus
+#MCU = at90usb162
+#BOARD = MAXIMUS
+#F_CPU = 16000000
+
+## Minimus 32
+## It actually is atmega32u2 but at90usb162 is compatible and
+## the latest avr-gcc doesn't compile for atmega32u2
+#MCU = at90usb162
+#MCU = atmega32u2
+#BOARD = MINIMUS
+#F_CPU = 16000000
+
+## Minimus v1
+#MCU = at90usb162
+#BOARD = MINUMUS
+#F_CPU = 16000000
+
+## Olimex 8Mhz
+#MCU = at90usb162
+#BOARD = OLIMEX
+#F_CPU = 8000000
+
+## Olimex 16Mhz
+#MCU = at90usb162
+#BOARD = OLIMEX
+#F_CPU = 16000000
+
+## OpenKubus
+#MCU = atmega16u4
+#BOARD = USBKEY
+#F_CPU = 8000000
 
 ## Teensy 1.0
 #MCU = at90usb162
 #BOARD = TEENSY
 #F_CPU = 16000000
 
-## Teensy++ 1.0
-#MCU = at90usb646
+## Teensy 2.0
+#MCU = atmega32u4
 #BOARD = TEENSY
 #F_CPU = 16000000
 
-## Teensy 2.0
-#MCU = atmega32u4
+## Teensy++ 1.0
+#MCU = at90usb646
 #BOARD = TEENSY
 #F_CPU = 16000000
 
@@ -88,36 +129,9 @@
 #BOARD = USBKEY
 #F_CPU = 8000000
 
-## Minimus v1
-#MCU = at90usb162
-#BOARD = MINUMUS
-#F_CPU = 16000000
-
-## Minimus 32
-## It actually is atmega32u2 but at90usb162 is compatible and
-## the latest avr-gcc doesn't compile for atmega32u2
-#MCU = at90usb162
-#BOARD = MINIMUS
-#F_CPU = 16000000
-
-## Maximus
-#MCU = at90usb162
-#BOARD = MAXIMUS
-#F_CPU = 16000000
-
-## Blackcat
-#MCU = at90usb162
-#BOARD = BLACKCAT
-#F_CPU = 16000000
-
-## Xplain
-#MCU = at90usb1287
-#BOARD = XPLAIN
-#F_CPU = 8000000
-
-## Olimex
-#MCU = at90usb162
-#BOARD = OLIMEX
+## ATMEGAUSBKEY
+#MCU = atmega16u4
+#BOARD = USBKEY
 #F_CPU = 8000000
 
 ## USBTINYMKII
@@ -125,14 +139,9 @@
 #BOARD = USBTINYMKII
 #F_CPU = 16000000
 
-## Benito
-#MCU = at90usb162
-#BOARD = BENITO
-#F_CPU = 16000000
-
-## OpenKubus
-#MCU = atmega16u4
-#BOARD = USBKEY
+## Xplain
+#MCU = at90usb1287
+#BOARD = XPLAIN
 #F_CPU = 8000000
 
 

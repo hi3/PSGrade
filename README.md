@@ -27,9 +27,9 @@ The repository uses the LUFA library as a submodule.  To clone, use something li
 Configuring
 -----------
 
-Edit Makefile to reflect your board.  Alternately, you can just use the build_hex.sh to automatically build hex files for all supported boards.
+Edit Makefile to reflect your board.  Alternately, you can just use the "build_hex.sh" to automatically build hex files for all supported boards.
 
-Edit jig_key in src/key.h
+Edit jig_key in "src/key.h" as it does not have a valid key.
 
 // ADD VALID JIG KEY HERE (aka master key)
 

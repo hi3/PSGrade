@@ -1,8 +1,0 @@
-PSGrade
-This is PSGrade, it does not have a valid key yet.
-add a valid key to src/key.h and it will work (hopefully)
-
-To build for all boards, type ./buildall.sh
-
-To clean for all boards, type .cleanall.sh
-

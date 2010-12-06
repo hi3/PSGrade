@@ -1,5 +1,5 @@
 /*
-PSGroove Exploit
+PSGrade
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,11 +15,22 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+
+//
+// ADD VALID JIG KEY HERE (aka master key)
+//
 const uint8_t jig_key[20] = {
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
- 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+	0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00,
+	0x00, 0x00, 0x00, 0x00
 };
 
+
+//
+// NO NEED TO EDIT BELOW UNLESS YOU KNOW WHAT YOU ARE DOING
+//
 const uint8_t PROGMEM jig_id [] = {0xaa, 0xaa};
 
 static uint8_t jig_challenge_res[64];
