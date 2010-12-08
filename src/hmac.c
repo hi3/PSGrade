@@ -1,31 +1,32 @@
-/*  HMAC-SHA-1 - an implementation of the HMAC message authentication
-    Version as of March 4th 2007
-    
-    Copyright (C) 2007 CHZ-Soft, Christian Zietz, <czietz@gmx.net>
-    See README file for more information.
-    
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+/*
+HMAC-SHA-1 - an implementation of the HMAC message authentication
+Version as of March 4th 2007
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Copyright (C) 2007 CHZ-Soft, Christian Zietz, <czietz@gmx.net>
+See README file for more information.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, 
-    Boston, MA  02110-1301, USA
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the
+Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+Boston, MA 02110-1301, USA
 */
 
 #include <stdint.h>
 #include <string.h>
 #include "sha1.h"
 
-#define SHA1_DIGESTSIZE  20
-#define SHA1_BLOCKSIZE   64
+#define SHA1_DIGESTSIZE 20
+#define SHA1_BLOCKSIZE 64
 
 unsigned char hmackey[SHA1_BLOCKSIZE];
 
@@ -78,7 +79,7 @@ void HMACDone(void) {
 }
 
 // Authenticates just one arbitrarily sized chunk of data
-void HMACOnce(const unsigned char* key, const uint8_t klen, 
+void HMACOnce(const unsigned char* key, const uint8_t klen,
               const unsigned char* data, int len) {
   HMACInit(key, klen);
   while (len>=0) {
@@ -89,6 +90,3 @@ void HMACOnce(const unsigned char* key, const uint8_t klen,
   HMACDone();
 }
 
-
-
-  
