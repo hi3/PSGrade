@@ -34,7 +34,7 @@ unsigned char hmackey[SHA1_BLOCKSIZE];
 // key must be smaller than 64 bytes
 void HMACInit(const unsigned char* key, const uint8_t len) {
   uint8_t i;
-  
+
   // copy key, XOR it for the inner digest, pad it to block size
   for (i=0;i<len;i++) {
     hmackey[i] = key[i] ^ 0x36;
@@ -42,7 +42,7 @@ void HMACInit(const unsigned char* key, const uint8_t len) {
   for (i=len;i<SHA1_BLOCKSIZE;i++) {
     hmackey[i] = 0x36;
   }
-  
+
   // initialize SHA1 and hash key
   SHA1Init();
   SHA1Block(hmackey, SHA1_BLOCKSIZE);
@@ -59,17 +59,17 @@ void HMACBlock(const unsigned char* data, const uint8_t len) {
 void HMACDone(void) {
   uint8_t i;
   unsigned char temp[SHA1_DIGESTSIZE];
-  
+
   // terminate inner digest and store it
   SHA1Done();
   memcpy(temp, shadigest, SHA1_DIGESTSIZE);
-  
+
   // prepare key for outer digest
   // buffer will contain the original key xor 0x5c
   for (i=0;i<SHA1_BLOCKSIZE;i++) {
     hmackey[i] ^= 0x6a;
   }
-  
+
   // initialize SHA1 and hash key
   SHA1Init();
   SHA1Block(hmackey, SHA1_BLOCKSIZE);

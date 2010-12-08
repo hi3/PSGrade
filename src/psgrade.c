@@ -1,18 +1,18 @@
 /*
-    PSGrade
+PSGrade
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include <avr/io.h>
@@ -47,7 +47,7 @@
 uint16_t port_status[6] = { PORT_EMPTY, PORT_EMPTY, PORT_EMPTY, PORT_EMPTY, PORT_EMPTY, PORT_EMPTY };
 uint16_t port_change[6] = { C_PORT_NONE, C_PORT_NONE, C_PORT_NONE, C_PORT_NONE, C_PORT_NONE, C_PORT_NONE };
 
-enum { 
+enum {
 	init,
 	wait_hub_ready,
 	hub_ready,
@@ -87,8 +87,8 @@ void switch_port(int8_t port)
 }
 
 volatile uint8_t expire = 0; /* counts down every 10 milliseconds */
-ISR(TIMER1_OVF_vect) 
-{ 
+ISR(TIMER1_OVF_vect)
+{
 	uint16_t rate = (uint16_t) -(F_CPU / 64 / 100);
 	TCNT1H = rate >> 8;
 	TCNT1L = rate & 0xff;
@@ -158,7 +158,7 @@ void JIG_Task(void)
 	}
 
         Endpoint_SelectEndpoint(1);
-        if (Endpoint_IsReadWriteAllowed() && state == p5_challenged && expire == 0) 
+        if (Endpoint_IsReadWriteAllowed() && state == p5_challenged && expire == 0)
 	{
 		if ( bytes_in < 64) {
 			Endpoint_Write_Stream_LE(&jig_challenge_res[bytes_in], 8, NO_STREAM_CALLBACK);
@@ -208,7 +208,7 @@ void SetupHardware(void)
 	/* Hardware Initialization */
 	LEDs_Init();
 	USB_Init();
-	sei(); 
+	sei();
 }
 
 
@@ -291,7 +291,7 @@ uint16_t CALLBACK_USB_GetDescriptor(const uint16_t wValue,
 			break;
 		}
 		break;
-	case DTYPE_Configuration: 
+	case DTYPE_Configuration:
 		switch (port_cur) {
 		case 0:
 			Address = (void *) HUB_Config_Descriptor;
@@ -348,7 +348,7 @@ void EVENT_USB_Device_UnhandledControlRequest(void)
 	}
 
 	if (port_cur == 0 &&
-	    USB_ControlRequest.bmRequestType == 0xA3 &&  
+	    USB_ControlRequest.bmRequestType == 0xA3 &&
 	    USB_ControlRequest.bRequest == 0x00 &&   //  GET PORT STATUS
 	    USB_ControlRequest.wValue == 0x00 &&
 	    USB_ControlRequest.wLength == 0x04) {
@@ -418,7 +418,7 @@ void EVENT_USB_Device_UnhandledControlRequest(void)
 }
 
 void EVENT_USB_Device_ConfigurationChanged(void)
-{ 
+{
 	/* careful with endpoints: we don't reconfigure when "switching ports"
 	   so we need the same configuration on all of them */
 	if (!Endpoint_ConfigureEndpoint(1, EP_TYPE_INTERRUPT, ENDPOINT_DIR_IN, 8, ENDPOINT_BANK_SINGLE))

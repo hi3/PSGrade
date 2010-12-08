@@ -1,23 +1,24 @@
-/*  SHA-1 - an implementation of the Secure Hash Algorithm in C
-    Version as of September 22nd 2006
-    
-    Copyright (C) 2006 CHZ-Soft, Christian Zietz, <czietz@gmx.net>
-    See README file for more information.
-    
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
+/*
+SHA-1 - an implementation of the Secure Hash Algorithm in C
+Version as of September 22nd 2006
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Copyright (C) 2006 CHZ-Soft, Christian Zietz, <czietz@gmx.net>
+See README file for more information.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the 
-    Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, 
-    Boston, MA  02110-1301, USA
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the
+Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+Boston, MA  02110-1301, USA
 */
 
 // define this on little endian architectures
@@ -46,11 +47,11 @@ union _message {
 
 struct shastate {
   uint32_t h0,h1,h2,h3,h4;
-#ifdef SHA_BIG_DATA  
+#ifdef SHA_BIG_DATA
   uint32_t count;
-#else  
+#else
   uint16_t count;
-#endif  
+#endif
 };
 
 union _digest {
@@ -62,13 +63,13 @@ union _digest {
 void SHA1(void) {
   uint8_t i;
   uint32_t a,b,c,d,e,f,k,t;
-  
+
   a = shadigest.state.h0;
   b = shadigest.state.h1;
   c = shadigest.state.h2;
   d = shadigest.state.h3;
-  e = shadigest.state.h4;  
-  
+  e = shadigest.state.h4;
+
   // main loop: 80 rounds
   for (i=0; i<=79; i++) {
     if (i<=19) {
@@ -85,20 +86,20 @@ void SHA1(void) {
       k = 0xCA62C1D6;
     }
 
-    // blow up to 80 dwords while in the loop, save some RAM  
+    // blow up to 80 dwords while in the loop, save some RAM
     if (i>=16) {
       t = rol(message.w[(i+13)&15] ^ message.w[(i+8)&15] ^ message.w[(i+2)&15] ^ message.w[i&15], 1);
       message.w[i&15] = t;
     }
-    
+
     t = rol(a, 5) + f + e + k + message.w[i&15];
     e = d;
     d = c;
     c = rol(b, 30);
     b = a;
-    a = t; 
+    a = t;
   }
-  
+
   shadigest.state.h0 += a;
   shadigest.state.h1 += b;
   shadigest.state.h2 += c;
@@ -119,23 +120,23 @@ void SHA1Init(void) {
 // Only the last block *must* be smaller than 64 bytes.
 void SHA1Block(const unsigned char* data, const uint8_t len) {
   uint8_t i;
-  
+
   // clear all bytes in data block that are not overwritten anyway
   for (i=len>>2;i<=15;i++) {
     message.w[i] = 0;
   }
-  
+
 #ifdef SHA_LITTLE_ENDIAN
   // swap bytes
   for (i=0;i<len;i+=4) {
     message.data[i] = data[i+3];
     message.data[i+1] = data[i+2];
     message.data[i+2] = data[i+1];
-    message.data[i+3] = data[i];    
+    message.data[i+3] = data[i];
   }
 #else
   memcpy(message.data, data, len);
-#endif  
+#endif
 
   // remember number of bytes processed for final block
   shadigest.state.count += len;
@@ -151,10 +152,10 @@ void SHA1Block(const unsigned char* data, const uint8_t len) {
       message.w[15] = (uint32_t)(shadigest.state.count) * 8;
     }
   }
-  
+
   SHA1();
-  
-  // was last data block, but there wasn't space for the size: 
+
+  // was last data block, but there wasn't space for the size:
   // process another block
   if ((len>=56) && (len<64)) {
     for (i=0; i<=14; i++) {
@@ -165,7 +166,7 @@ void SHA1Block(const unsigned char* data, const uint8_t len) {
   }
 }
 
-// Correct the endianess if needed  
+// Correct the endianess if needed
 void SHA1Done(void) {
 #ifdef SHA_LITTLE_ENDIAN
   uint8_t i;
@@ -177,9 +178,9 @@ void SHA1Done(void) {
     shadigest.data[4*i+3] = j;
     j = shadigest.data[4*i+1];
     shadigest.data[4*i+1] = shadigest.data[4*i+2];
-    shadigest.data[4*i+2] = j;  
+    shadigest.data[4*i+2] = j;
   }
-#endif 
+#endif
 }
 
 // Hashes just one arbitrarily sized chunk of data
@@ -192,7 +193,3 @@ void SHA1Once(const unsigned char* data, int len) {
   }
   SHA1Done();
 }
-
-
-
-  

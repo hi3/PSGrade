@@ -27,19 +27,7 @@ The repository uses the LUFA library as a submodule.  To clone, use something li
 Configuring
 -----------
 
-Edit Makefile to reflect your board.  Alternately, you can just use the "build_hex.sh" to automatically build hex files for all supported boards.
-
-Edit jig_key in "src/key.h" as it does not have a valid key.
-
-// ADD VALID JIG KEY HERE (aka master key)
-
-const uint8_t jig_key[20] = {
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00
-};
+Edit Makefile to reflect the dongle being used.  Alternately, you can just use the "build_hex.sh" to automatically build hex files for all supported boards.
 
 
 Building
@@ -53,10 +41,40 @@ On Windows, WinAVR should do the trick.
 Using
 -----
 To use the service jig:
-  
-* Hard power cycle your PS3 (using the switch in back, or unplug it)
-* Plug the dongle into your PS3.
-* Press the PS3 power button.
+
+* Hard power cycle the PS3 (using the switch in back, or unplug it)
+* Plug the downgrade dongle into the PS3
+* Press the PS3 power button, followed by disc eject
+* Once the playstation has booted, look at the firmware version
+* Shutdown the playstation
+* Remove the dongle
+
+* Power on the playstation, verify the playstation is now in service mode
+* Shutdown the playstation
+
+* Locate the necessary lv2diag.self (stage 1) and PS3UPDAT.PUP
+* Put both files in the root (not in a sub-directory) of a freshly formatted USB flash drive (it is important there are NO other files on the USB flash drive)
+* Plug the USB flash drive into the USB port closest to the Blu-Ray drive
+* Power on the playstation
+* There will not be any activity on the screen, the USB flash drive access LED will blink
+* Once the downgrade has completed, the playstation will shutdown
+* Remove the USB Flash drive
+
+* Power on the playstation, verify the playstation is still in service mode
+* Check the firmware version in system settings
+* Verify the downgrade was successful
+* Shutdown the playstation
+
+* Locate the necessary lv2diag.self (stage 2)
+* Put the file in the root (not a sub-directory) of a freshly formatted USB flash drive
+* As before, plug the USB flash drive into the USB port closest the Blu-Ray drive
+* Power on the playstation, the lv2diag will disable service mode and shutdown the playstation
+* Remove the USB flash drive once the playstation is shutdown
+* Turn off the power or unplug the playstation
+
+* Turn on the power / plug in the playstation
+* Once the playstation has booted, verify it is no longer in service mode
+* Verify the firmware version in the system settings
 
 
 Thanks (in no particular order)
