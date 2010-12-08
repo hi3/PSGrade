@@ -35,7 +35,13 @@ Building
 On Linux, use the AVR GCC toolchain (Debian/Ubuntu package: gcc-avr).
 On Windows, WinAVR should do the trick.
 
+To make hex files for all supported dongles:
+
     ./build_hex.sh
+
+To make a single hex file for a dongle configured in the Makefile:
+
+    make
 
 
 Using
